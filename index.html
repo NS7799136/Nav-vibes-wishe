@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌅 Good Morning – A Wish For You</title>
+  <meta name="description" content="Send a beautiful, personalized Good Morning wish page with your name in it. Made with ❤️ by Navdeep Singh ji." />
+  <meta property="og:title" content="🌅 Good Morning – A Wish For You" />
+  <meta property="og:description" content="Open to see a calming good morning wish with your name." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#f7c77d" />
+  <style>
+    :root{
+      --bg-start:#ffecd2;
+      --bg-end:#fcb69f;
+      --accent:#ff7a59;
+      --accent-2:#ffd36e;
+      --ink:#2b2b2b;
+      --muted:#6b6b6b;
+      --card: rgba(255,255,255,0.85);
+      --shadow: 0 10px 30px rgba(0,0,0,0.12);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background: linear-gradient(160deg,var(--bg-start),var(--bg-end));
+      overflow-x:hidden;
+    }
+    body::before{
+      content:""; position:fixed; inset:0; pointer-events:none;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,0.35), transparent 60%),
+                  radial-gradient(1000px 500px at 80% 90%, rgba(255,255,255,0.25), transparent 60%);
+      animation: glow 12s ease-in-out infinite alternate;
+      z-index:0;
+    }
+    @keyframes glow{from{opacity:.6; filter: blur(0)} to{opacity:1; filter: blur(2px)}}
+
+    .wrap{ position:relative; z-index:1; min-height:100%; display:flex; align-items:center; justify-content:center; padding:30px }
+
+    .card{
+      width:min(900px,100%);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+
+    .sky{ position:relative; height:260px; background: linear-gradient(180deg, #ffe9b5, #ffd1a1 60%, transparent 100%)}
+    .sun{ position:absolute; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #fff 0 20%, #ffeaa7 40%, #ffd36e 60%, #ffc04d 75%, rgba(255,192,77,.0) 76%); left:50%; transform:translateX(-50%); bottom:-5px; box-shadow:0 0 80px 20px rgba(255,211,110,.6)}
+
+    .floaters{ position:absolute; inset:0; overflow:hidden; pointer-events:none }
+    .petal{ position:absolute; width:16px; height:10px; background:linear-gradient(90deg,#ff9a9e,#fad0c4); border-radius:12px 12px 12px 12px; opacity:.75; filter:blur(.2px); animation: drift var(--dur) linear infinite; transform:rotate(var(--rot))}
+    @keyframes drift{ to{ transform: translate3d(var(--tx), 110vh,0) rotate(calc(var(--rot) + 180deg)); } }
+
+    .content{ padding:28px; display:grid; gap:20px }
+
+    .gm{ font-size:clamp(34px, 5vw, 58px); line-height:1.1; font-weight:800; letter-spacing:.5px; text-align:center }
+    .gm .spark{ display:inline-block; animation: pop 1.2s ease-out infinite }
+    @keyframes pop{ 0%,100%{ transform:translateY(0) scale(1)} 50%{ transform:translateY(-4px) scale(1.06) } }
+
+    .type{ font-size:clamp(18px,2.6vw,24px); text-align:center; color:var(--muted); min-height:2.2em }
+
+    .from{ text-align:center; font-weight:700; font-size:clamp(18px,2.2vw,22px); }
+    .from .name{ color:#e85a39 }
+
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding-top:6px }
+
+    .btn{
+      padding:12px 16px; border:none; border-radius:14px; background:#1f2937; color:#fff; font-weight:700; cursor:pointer; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease; display:flex; align-items:center; gap:10px
+    }
+    .btn:hover{ transform:translateY(-2px) }
+    .btn.secondary{ background:#ffffff; color:#1f2937; border:1px solid rgba(0,0,0,.05) }
+
+    .share{ display:grid; gap:14px; background: rgba(255,255,255,.6); border-radius: 14px; padding:16px; }
+    .row{ display:flex; gap:10px }
+    .input{ flex:1; min-width:140px; padding:12px 14px; border-radius:12px; border:1px solid #e5e7eb; outline:none; font-size:16px }
+    .input:focus{ border-color:#c6c9d2; box-shadow:0 0 0 3px rgba(31,41,55,.08) }
+
+    .note{ color:#555; font-size:14px; text-align:center }
+
+    .footer{ text-align:center; padding:8px 0 18px; color:#6b7280; font-size:13px }
+    .footer a{ color:#374151; font-weight:700; text-decoration:none }
+
+    .audio-ctl{ position:absolute; right:14px; top:14px; background: rgba(255,255,255,.7); padding:8px 12px; border-radius:999px; font-size:14px; backdrop-filter: blur(4px); box-shadow: var(--shadow); cursor:pointer; user-select:none }
+
+    @media (max-width:520px){ .sky{height:220px} .sun{ width:120px; height:120px; bottom:-40px } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="sky">
+        <div class="sun" aria-hidden="true"></div>
+        <div class="floaters" id="floaters" aria-hidden="true"></div>
+        <div class="audio-ctl" id="audioBtn">🔈 Play sound</div>
+      </div>
+      <div class="content">
+        <div class="gm">Good Morning <span class="spark">🌸</span></div>
+        <div class="type" id="type">Wishing you fresh energy, calm mind & happy moments today...</div>
+        <div class="from">— From <span class="name" id="sender">Navdeep Singh ji</span></div>
+
+        <!-- Buttons row (pehle hidden) -->
+        <div class="actions" id="shareRow" style="display:none">
+          <button class="btn" id="whBtn">Share on WhatsApp</button>
+          <button class="btn secondary" id="copyBtn">Copy Page Link</button>
+        </div>
+
+        <!-- Generate link row -->
+        <div class="share" id="shareBox">
+          <div class="note"><b>Personalize & forward:</b> Put your name below → get a shareable link where the wish shows from <i>your</i> name.</div>
+          <div class="row">
+            <input id="yourName" class="input" placeholder="Type your name (e.g., Aman)">
+            <button class="btn" id="makeLink">Submit</button>
+          </div>
+          <div class="row" id="outRow" style="display:none">
+            <input id="outLink" class="input" readonly>
+            <button class="btn secondary" id="copyOut">Copy</button>
+          </div>
+        </div>
+
+        <div class="footer">Made with ☀️ by <a href="#" id="credit">Navdeep Singh ji</a> • Forward with love, every morning</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gentle birds + chimes -->
+<audio id="bgm" preload="auto">
+  <source src="goodmorning.mp3" type="audio/mpeg">
+</audio>
+
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const fallbackName = 'Navdeep Singh ji';
+    const senderName = (params.get('from') || fallbackName).trim();
+    const senderEl = document.getElementById('sender');
+    senderEl.textContent = senderName || fallbackName;
+    document.getElementById('credit').textContent = fallbackName;
+
+    const lines = [
+      'ਪ੍ਰਮਾਤਮਾ ਤੁਹਾਨੂੰ ਹਮੇਸ਼ਾ ਚੜ੍ਹਦੀਕਲਾ ਵਿੱਚ ਰੱਖੇ।',
+      'ਵਾਹਿਗੁਰੂ ਜੀ,  ਭਾਗਾਂ ਵਾਲੀ ਸਵੇਰ ਮੁਬਾਰਕ ਜੀ ਤੁਹਾਨੂੰ।',
+      'ਅੰਮ੍ਰਿਤ ਵੇਲੇ ਉੱਠ ਕੇ ਰੱਬ ਦਾ ਨਾਮ ਲੈਂਦੇ ਹਾਂ ਫਿਰ ਬਾਕੀ ਸਾਰਿਆਂ ਨੂੰ ਗੁੱਡ ਮੋਰਨਿੰਗ ਕਹਿੰਦੇ ਹਾਂ। ✨'
+    ];
+    let li = 0, ti = 0, dir = 1;
+    const typeEl = document.getElementById('type');
+    function typer(){
+      const text = lines[li];
+      ti += dir;
+      typeEl.textContent = text.slice(0, ti);
+      if(ti === text.length){ dir = -1; setTimeout(typer, 1400); return; }
+      if(ti === 0){ dir = 1; li = (li+1) % lines.length; }
+      setTimeout(typer, dir>0 ? 48 : 36);
+    }
+    setTimeout(typer, 1000);
+
+    const flo = document.getElementById('floaters');
+    const rand = (a,b)=> Math.random()*(b-a)+a;
+    function makePetal(){
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.style.left = rand(-10, 100) + 'vw';
+      p.style.top = '-10vh';
+      p.style.setProperty('--rot', rand(-40,40)+'deg');
+      p.style.setProperty('--tx', rand(-20,20)+'vw');
+      p.style.setProperty('--dur', rand(8,16)+'s');
+      flo.appendChild(p);
+      setTimeout(()=> p.remove(), 17000);
+    }
+    setInterval(makePetal, 500);
+    for(let i=0;i<14;i++) setTimeout(makePetal, i*300);
+
+    const audio = document.getElementById('bgm');
+    const audioBtn = document.getElementById('audioBtn');
+    let playing = false;
+    audioBtn.addEventListener('click', async ()=>{
+      try{
+        if(!playing){ await audio.play(); audioBtn.textContent='🔊 Sound on'; playing=true }
+        else { audio.pause(); audio.currentTime=0; audioBtn.textContent='🔈 Play sound'; playing=false }
+      }catch(e){ audioBtn.textContent='🔇 Tap to enable sound'; }
+    });
+
+    function buildLink(name){
+      const base = location.origin + location.pathname;
+      const q = name ? ('?from='+ encodeURIComponent(name)) : '';
+      return base + q;
+    }
+
+    const yourName = document.getElementById('yourName');
+    const makeLink = document.getElementById('makeLink');
+    const outRow = document.getElementById('outRow');
+    const outLink = document.getElementById('outLink');
+    const copyOut = document.getElementById('copyOut');
+    const shareRow = document.getElementById('shareRow');
+
+    makeLink.addEventListener('click', ()=>{
+      const name = (yourName.value || '').trim();
+      if(!name){ yourName.focus(); yourName.placeholder='Please type your name ✍️'; return; }
+      senderEl.textContent = name;
+      const link = buildLink(name);
+      outLink.value = link;
+      outRow.style.display = '';
+      shareRow.style.display = ''; // ✅ show buttons
+    });
+
+    copyOut.addEventListener('click', async ()=>{
+      if(!outLink.value) return;
+      try{ await navigator.clipboard.writeText(outLink.value); copyOut.textContent='Copied ✅'; setTimeout(()=> copyOut.textContent='Copy', 1400);}catch(e){ outLink.select(); document.execCommand('copy'); copyOut.textContent='Copied ✅'; setTimeout(()=> copyOut.textContent='Copy', 1400); }
+    });
+
+    document.getElementById('whBtn').addEventListener('click', ()=>{
+      const link = buildLink(senderEl.textContent);
+      const text = `🌅 Good Morning!\nA little sunshine for you → ${link}`;
+      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', async ()=>{
+      const link = buildLink(senderEl.textContent);
+      try{ await navigator.clipboard.writeText(link); alert('Link copied! You can paste and share it anywhere.'); }catch(e){ prompt('Copy this link:', link); }
+    });
+  </script>
+</body>
+</html>
