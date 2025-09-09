@@ -51,7 +51,7 @@
     }
 
     .sky{ position:relative; height:260px; background: linear-gradient(180deg, #ffe9b5, #ffd1a1 60%, transparent 100%)}
-    .sun{ position:absolute; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #fff 0 20%, #ffeaa7 40%, #ffd36e 60%, #ffc04d 75%, rgba(255,192,77,.0) 76%); left:50%; transform:translateX(-50%); bottom:-40px; box-shadow:0 0 80px 20px rgba(255,211,110,.6)}
+    .sun{ position:absolute; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle at 30% 30%, #ffffff 0 20%, #ffeaa7 40%, #ffd36e 60%, #ffc04d 75%, rgba(255,192,77,.0) 76%); left:50%; transform:translateX(-50%); bottom:-10px; box-shadow:0 0 80px 20px rgba(255,211,110,.6)}
 
     .floaters{ position:absolute; inset:0; overflow:hidden; pointer-events:none }
     .petal{ position:absolute; width:16px; height:10px; background:linear-gradient(90deg,#ff9a9e,#fad0c4); border-radius:12px; opacity:.75; filter:blur(.2px); animation: drift var(--dur) linear infinite; transform:rotate(var(--rot))}
@@ -125,8 +125,7 @@
         </div>
 
         <div class="share" id="shareBox">
-          <div class="punjabi-highlight">ਤੁਸੀ ਮੇਰੇ ਨਾਮ ਦੀ ਜਗ੍ਹਾਂ ਆਪਣਾ ਨਾਮ CHANGE ਕਰ ਸਕਦੇਂ ਹੋਂ।</div>
-          <div class="note">ਥੱਲੇ ਆਪਣਾ ਨਾਮ ਲਿੱਖ ਕੇ SUBMIT ਤੇ ਕਲਿੱਕ ਕਰੋਂ</div>
+          <div class="note">ਤੁਸੀ -From ਦੇ ਅੱਗੇ ਆਪਣਾ ਨਾਮ, ਆਪਣੀ cast, ਸ਼ਹਿਰ ਦਾ ਨਾਮ etc. Change ਕਰ ਸਕਦੇ ਹੋਂ। ਥੱਲੇ Type ਕਰ ਕੇ Submit ਤੇ ਕਲਿੱਕ ਕਰੋਂ।</div>
           <div class="row">
             <input id="yourName" class="input" placeholder="Type your name (e.g., Aman)">
             <button class="btn" id="makeLink">Submit</button>
@@ -144,7 +143,7 @@
   </div>
 
   <audio id="bgm" preload="auto">
-    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQAA" type="audio/mpeg">
+    <source src="goodmorning.mp3" type="audio/mpeg">
   </audio>
 
   <script>
@@ -156,9 +155,9 @@
     document.getElementById('credit').textContent = fallbackName;
 
     const lines = [
-      'Wishing you fresh energy, calm mind & happy moments today...',
-      'May your day bloom like a sunrise—soft, bright, and warm.',
-      'Sukoon, muskurahat te chardi kala—ajj da din tuhade lai. ✨'
+      'ਪ੍ਰਮਾਤਮਾਂ ਤੁਹਾਨੂੰ ਹਮੇਸ਼ਾ ਚੜ੍ਹਦੀਕਲਾ ਵਿੱਚ ਰੱਖੇ ਜੀ।',
+      'ਵਾਹਿਗੁਰੂ ਜੀ,  ਭਾਗਾਂ ਵਾਲੀ ਸਵੇਰ ਮੁਬਾਰਕ ਜੀ ਤੁਹਾਨੂੰ।',
+      'ਅੰਮ੍ਰਿਤ ਵੇਲੇ ਉੱਠ ਕੇ ਰੱਬ ਦਾ ਨਾਮ ਲੈਂਦੇ ਹਾਂ, ਫਿਰ ਬਾਕੀ ਸਾਰਿਆਂ ਨੂੰ ਗੁੱਡ ਮੋਰਨਿੰਗ ਕਹਿੰਦੇ ਹਾਂ ਜੀ।'
     ];
     let li = 0, ti = 0, dir = 1;
     const typeEl = document.getElementById('type');
@@ -168,9 +167,9 @@
       typeEl.textContent = text.slice(0, ti);
       if(ti === text.length){ dir = -1; setTimeout(typer, 1400); return; }
       if(ti === 0){ dir = 1; li = (li+1) % lines.length; }
-      setTimeout(typer, dir>0 ? 28 : 16);
+      setTimeout(typer, dir>0 ? 48 : 36);
     }
-    setTimeout(typer, 500);
+    setTimeout(typer, 1000);
 
     const flo = document.getElementById('floaters');
     const rand = (a,b)=> Math.random()*(b-a)+a;
