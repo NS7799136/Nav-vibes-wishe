@@ -125,7 +125,7 @@
         </div>
 
         <div class="share" id="shareBox">
-          <div class="note">ਤੁਸੀ -From ਦੇ ਅੱਗੇ ਆਪਣਾ ਨਾਮ, ਆਪਣੀ cast, ਸ਼ਹਿਰ ਦਾ ਨਾਮ etc. Change ਕਰ ਸਕਦੇ ਹੋਂ। ਥੱਲੇ Type ਕਰ ਕੇ Submit ਤੇ ਕਲਿੱਕ ਕਰੋਂ।</div>
+          <div id="noteline" class="note">ਤੁਸੀ -From ਦੇ ਅੱਗੇ ਆਪਣਾ ਨਾਮ, ਆਪਣੀ cast, ਸ਼ਹਿਰ ਦਾ ਨਾਮ etc. Change ਕਰ ਸਕਦੇ ਹੋਂ। ਥੱਲੇ Type ਕਰ ਕੇ Submit ਤੇ ਕਲਿੱਕ ਕਰੋਂ।</div>
           <div class="row">
             <input id="yourName" class="input" placeholder="Type your name (e.g., Aman)">
             <button class="btn" id="makeLink">Submit</button>
@@ -217,6 +217,10 @@
       outLink.value = link;
       outRow.style.display = '';
       senderEl.textContent = name;
+      // Hide Punjabi highlight + note line
+document.getElementById('highlightLine').style.display = 'none';
+document.getElementById('noteLine').style.display = 'none';
+
       shareBtn.style.display = '';
     });
 
@@ -246,6 +250,7 @@
   </script>
 </body>
 </html>
+
 
 
 
