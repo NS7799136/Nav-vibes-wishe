@@ -70,18 +70,36 @@
 
     .actions{ display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding-top:6px }
     .btn{
-      padding:12px 16px; border:none; border-radius:14px; background:#26ad4e; color:#fff; font-weight:700; cursor:pointer; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease; display:flex; align-items:center; gap:10px
+      padding:12px 16px; border:none; border-radius:14px; font-weight:700; cursor:pointer; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease; display:flex; align-items:center; gap:10px
     }
     .btn:hover{ transform:translateY(-2px) }
     .btn.secondary{ background:#ffffff; color:#1f2937; border:1px solid rgba(0,0,0,.05) }
 
+     /* ✅ Share button green */
+    .btn.share-green {
+      background: #22c55e;
+      color: #fff;
+    }
+    .btn.share-green:hover {
+      background: #16a34a;
+    }
+
+    /* ✅ Submit button yellow */
+    .btn.submit-yellow {
+      background: #facc15;
+      color: #111;
+    }
+    .btn.submit-yellow:hover {
+      background: #eab308;
+    }
+
     .share{ display:grid; gap:14px; background: rgba(255,255,255,.6); border-radius: 14px; padding:16px; width:100%; box-sizing:border-box; }
     .row{ display:flex; flex-wrap:wrap; gap:10px; width:100% }
     .input{ flex:1; min-width:140px; padding:12px 14px; border-radius:12px; border:1px solid #e5e7eb; outline:none; font-size:16px; width:100% }
-    .input:focus{ border-color:#c6c9d2; box-shadow:0 0 0 3px rgba(31,41,55,.08) }
+    .input:focus{ border-color:#c6c9d2; box-shadow:0 0 0 3px rgba(16, 139, 63, 0.08) }
 
-    .note{ color:#555; font-size:11px; text-align:center }
-    .punjabi-note{ color:#444; font-size:12px; text-align:center; margin-top:-8px; }
+    .note{ color:#555; font-size:14px; text-align:center }
+    .punjabi-note{ color:#444; font-size:15px; text-align:center; margin-top:-8px; }
     .punjabi-highlight { color:#111; font-size:15px; text-align:center; font-weight:bold; }
 
     .footer{ text-align:center; padding:8px 0 18px; color:#6b7280; font-size:13px }
@@ -91,21 +109,13 @@
 
     @media (max-width:520px){
       .sky{height:200px} 
-      .sun{ width:110px; height:110px; bottom:-10px } 
+      .sun{ width:110px; height:110px; bottom:-25px } 
       .content{padding:16px; gap:16px}
       .btn{flex:1; justify-content:center}
       .row{flex-direction:column; align-items:stretch}
     }
   </style>
   
-  <!-- Tracking Analytics Code -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZ4DRQG54W"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-CZ4DRQG54W');
-  </script>
 </head>
 <body>
   <div class="wrap">
@@ -116,19 +126,21 @@
         <div class="audio-ctl" id="audioBtn">🔈 Play sound</div>
       </div>
       <div class="content">
-        <div class="gm">Good Morning ji <span class="spark">🌸</span></div>
+        <div class="gm">Good Morning <span class="spark">🌸</span></div>
         <div class="type" id="type">Wishing you fresh energy, calm mind & happy moments today...</div>
         <div class="from">— From <span class="name" id="sender">Navdeep Singh ji</span></div>
 
         <div class="actions">
-          <button class="btn" id="shareBtn" onclick="sharePage()" style="display:none">Share</button>
+          <!-- ✅ Share button green -->
+          <button class="btn share-green" id="shareBtn" onclick="sharePage()" style="display:none">Share</button>
         </div>
 
         <div class="share" id="shareBox">
-          <div class="note">ਤੁਸੀ -From ਦੇ ਅੱਗੇ ਆਪਣਾ ਨਾਮ, ਆਪਣੀ cast, ਸ਼ਹਿਰ ਦਾ ਨਾਮ etc. Change ਕਰ ਸਕਦੇ ਹੋਂ। ਥੱਲੇ Type ਕਰ ਕੇ Submit ਤੇ ਕਲਿੱਕ ਕਰੋਂ।</div>
+          <div class="note" id="instructionText">ਤੁਸੀ -From ਦੇ ਅੱਗੇ ਆਪਣਾ ਨਾਮ, ਆਪਣੀ cast, ਸ਼ਹਿਰ ਦਾ ਨਾਮ etc. Change ਕਰ ਸਕਦੇ ਹੋਂ। ਥੱਲੇ Type ਕਰ ਕੇ Submit ਤੇ ਕਲਿੱਕ ਕਰੋਂ।</div>
           <div class="row">
             <input id="yourName" class="input" placeholder="Type your name (e.g., Aman)">
-            <button class="btn" id="makeLink">Submit</button>
+            <!-- ✅ Submit button yellow -->
+            <button class="btn submit-yellow" id="makeLink">Submit</button>
           </div>
           <div class="punjabi-note">ਜੇ ਇਹ WISH ਵਧੀਆਂ ਲੱਗੀ ਤਾ ਤੁਸੀ ਇਹ ਮੈਨੂੰ ਵਾਪਿਸ SEND ਕਰ ਕੇ, ਮੈਨੂੰ WISH ਕਰ ਸਕਦੇ ਹੋਂ। ਬਾਂਕੀ ਹੋਰ ਦੋਸਤਾਂ ਨੂੰ ਵੀ GOOD MORNING WISH ਕਰ ਸਕਦੇ ਹੋਂ।</div>
           <div class="row" id="outRow" style="display:none">
@@ -209,6 +221,7 @@
     const outLink = document.getElementById('outLink');
     const copyOut = document.getElementById('copyOut');
     const shareBtn = document.getElementById('shareBtn');
+    const instructionText = document.getElementById('instructionText');
 
     makeLink.addEventListener('click', ()=>{
       const name = (yourName.value || '').trim();
@@ -217,7 +230,10 @@
       outLink.value = link;
       outRow.style.display = '';
       senderEl.textContent = name;
-      shareBtn.style.display = '';
+      
+      // hide instruction and show share button
+      instructionText.style.display = 'none';
+      shareBtn.style.display = 'inline-block';
     });
 
     copyOut.addEventListener('click', async ()=>{
@@ -228,10 +244,9 @@
     function sharePage() {
       if (navigator.share) {
         navigator.share({
-          title: '🌸 Good Morning 🌸',
-          text: 'Good morning wish!',
-          url: window.location.href
-        }).then(()=>{
+  text: "🌞 Check 'Good Morning' wish 🌞\n" + window.location.href
+})
+.then(()=>{
           if (typeof gtag === 'function') {
             gtag('event', 'share_click', {
               'event_category': 'engagement',
@@ -246,13 +261,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
